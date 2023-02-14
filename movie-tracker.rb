@@ -1,6 +1,8 @@
 require "http"
 require "tty-box"
 require "tty-screen"
+require "pstore"
+require "tty-table"
 
 def get_movie_ratings
   puts "Please enter a movie:"
@@ -16,8 +18,24 @@ def get_movie_ratings
 end
 
 def display_movie_ratings(movie_info)
-  system "clear"
-  box = TTY::Box.frame(width: TTY::Screen.width / 2, height: TTY::Screen.height / 4, border: :thick, padding: [1, 3, 1, 3], title: { top_left: " #{movie_info["Title"]} ", bottom_right: " Rating: #{movie_info["imdbRating"]} " }) do
+  box = TTY::Box.frame(
+    width: TTY::Screen.width / 2,
+    height: TTY::Screen.height / 2,
+    border: :thick,
+    padding: [1, 3, 1, 3],
+    title: {
+      top_left: " #{movie_info["Title"]} ",
+      bottom_right: " Rating: #{movie_info["imdbRating"]} ",
+    },
+    style: {
+      fg: :bright_yellow,
+      bg: :blue,
+      border: {
+        fg: :bright_yellow,
+        bg: :blue,
+      },
+    },
+  ) do
     "Release Year: #{movie_info["Year"]}\n\n" +
     "Genre: #{movie_info["Genre"]}\n\n" +
     "Directed by: #{movie_info["Director"]}\n\n" +
@@ -32,4 +50,16 @@ def main
   display_movie_ratings(movie_info)
 end
 
-main if __FILE__ == $PROGRAM_NAME
+puts "Welcome to the Movie Tracker!"
+while true
+  system "clear"
+  puts "Select from the following options: [M]ovies [Q]uit"
+  if gets.chomp.downcase == "m"
+    while true
+      system "clear"
+      main if __FILE__ == $PROGRAM_NAME
+      print "Press enter to continue"
+      gets.chomp
+    end
+  end
+end
