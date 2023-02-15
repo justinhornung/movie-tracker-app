@@ -72,3 +72,5 @@ while true
     gets.chomp
   end
 end
+
+# TODO: Add seqlite3 to store date in the file instead of a database.
