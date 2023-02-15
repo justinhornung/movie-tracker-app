@@ -54,12 +54,18 @@ puts "Welcome to the Movie Tracker!"
 while true
   system "clear"
   puts "Select from the following options: [M]ovies [Q]uit"
-  if gets.chomp.downcase == "m"
-    while true
-      system "clear"
-      main if __FILE__ == $PROGRAM_NAME
-      print "Press enter to continue"
-      gets.chomp
-    end
+  input_choice = gets.chomp.downcase
+  if input_choice == "m"
+    system "clear"
+    main if __FILE__ == $PROGRAM_NAME
+    print "Press enter to continue"
+    gets.chomp
+  elsif input_choice == "q"
+    puts "Thanks for using the movie tracker! Goodbye"
+    break
+  else
+    puts "Invalid selection. Try again!"
+    print "Press enter to continue"
+    gets.chomp
   end
 end
