@@ -1,8 +1,8 @@
 require "http"
 require "tty-box"
 require "tty-screen"
-require "pstore"
-require "tty-table"
+# require "pstore"
+# require "tty-table"
 
 def get_movie_ratings
   puts "Please enter a movie:"
@@ -19,10 +19,10 @@ end
 
 def display_movie_ratings(movie_info)
   box = TTY::Box.frame(
-    width: TTY::Screen.width / 2,
-    height: TTY::Screen.height / 2,
+    width: TTY::Screen.width - 2,
+    height: TTY::Screen.height - 2,
     border: :thick,
-    padding: [1, 3, 1, 3],
+    padding: [1, 2, 1, 2],
     title: {
       top_left: " #{movie_info["Title"]} ",
       bottom_right: " Rating: #{movie_info["imdbRating"]} ",
@@ -53,7 +53,8 @@ end
 puts "Welcome to the Movie Tracker!"
 while true
   system "clear"
-  puts "[M]ovieLookup  [R]eadList  [Q]uit"
+  # puts "[M]ovieLookup  [R]eadList  [Q]uit"
+  puts "[M]ovieLookup [Q]uit"
   input_choice = gets.chomp.downcase
   if input_choice == "m"
     system "clear"
